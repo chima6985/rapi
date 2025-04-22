@@ -10,7 +10,7 @@ final response = await http.get(Uri.parse('$baseUrl/users'));
 
 if (response.statusCode == 200) {
  final List<dynamic> data = jsonDecode(response.body) ['data'];
- return  data.map((item) =>User.fromJson(item)).toList();
+ return  data.map((item) => User.fromJson(item)).toList();
 }
 else {
   throw Exception('Failed to Load the User');
