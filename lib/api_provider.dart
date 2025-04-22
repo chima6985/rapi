@@ -11,6 +11,10 @@ final apiServiceProvider = Provider<ApiService>((ref) {
   return ref.watch(apiServiceProvider).fetchUser() ;
  });
 
+ final UserProvider = StateNotifierProvider<UserNotifier, CreateUser?>((ref) {
+  return UserNotifier(ref.read(apiServiceProvider));
+ });
+
 class UserNotifier extends StateNotifier<CreateUser?> {
   final ApiService apiService;
   UserNotifier(this.apiService): super(null);

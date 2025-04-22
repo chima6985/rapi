@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:rapi_app/api_provider.dart';
+import 'package:rapi_app/create_user_screen.dart';
 
 void main() {
   runApp(ProviderScope(child: const MyApp()));
@@ -55,7 +56,9 @@ class UserListScreen extends ConsumerWidget {
           children: [
             Expanded(
               child: FloatingActionButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateUserScreen(),),);
+                },
                 child: Icon(Icons.add),
               ),
             ),
