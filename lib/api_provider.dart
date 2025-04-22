@@ -1,5 +1,6 @@
 import 'package:rapi_app/api_service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:rapi_app/create_user_model.dart';
 import 'package:rapi_app/user_model.dart';
 
 final apiServiceProvider = Provider<ApiService>((ref) {
@@ -10,4 +11,18 @@ final apiServiceProvider = Provider<ApiService>((ref) {
   return ref.watch(apiServiceProvider).fetchUser() ;
  });
 
+class UserNotifier extends StateNotifier<CreateUser?> {
+  final ApiService apiService;
+  UserNotifier(this.apiService): super(null);
 
+  Future<void>createUser(String name, String job)async{
+    try{
+     final user = await apiService.createUser(name, job);
+      state = user;
+    }
+    catch (e){
+      state = null;
+    }
+  }
+  
+}

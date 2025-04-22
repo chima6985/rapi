@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:rapi_app/create_user_model.dart';
 import 'package:rapi_app/user_model.dart';
 
 class ApiService {
@@ -15,18 +16,17 @@ else {
   throw Exception('Failed to Load the User');
 }
 }
-Future <void> createUser(String name, String job)async{
+Future <CreateUser> createUser(String name, String job)async{
   final response = await http.post(
   Uri.parse('$baseUrl/users'),
   headers: {'content-Type' : 'application/json'},
   body: jsonEncode({"name":name, "job":job}));
 
 if (response.statusCode == 200) {
- final List<dynamic> data = jsonDecode(response.body);
- return ;
+ return CreateUser.fromJson(jsonDecode(response.body));
 }
 else {
-  throw Exception('Failed to Load the User');
+  throw Exception('Failed to Create User');
 }
 }
 

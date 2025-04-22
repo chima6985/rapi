@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build( BuildContext context) {
+  Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -31,22 +31,37 @@ class UserListScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: Center(child: const Text('USER LIST'))),
       body: userList.when(
-      data: (users){
-        return ListView.builder(
-          itemCount: users.length,
-          itemBuilder: (context, index) {
-         final user =  users[index];
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundImage: NetworkImage(user.avatar),
-            ),
-            title: Text('${user.firstName} ${user.lastName}'),
-            subtitle: Text(user.email),
+        data: (users) {
+          return ListView.builder(
+            itemCount: users.length,
+            itemBuilder: (context, index) {
+              final user = users[index];
+              return ListTile(
+                leading: CircleAvatar(
+                  backgroundImage: NetworkImage(user.avatar),
+                ),
+                title: Text('${user.firstName} ${user.lastName}'),
+                subtitle: Text(user.email),
+              );
+            },
           );
-        });
-      },
-      error: (error, stack) => Text(error.toString()),
-      loading: () => Center(child: CircularProgressIndicator())),
+        },
+        error: (error, stack) => Text(error.toString()),
+        loading: () => Center(child: CircularProgressIndicator()),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(left: 30.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: FloatingActionButton(
+                onPressed: () {},
+                child: Icon(Icons.add),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
