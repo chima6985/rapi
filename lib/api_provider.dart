@@ -7,7 +7,7 @@ final apiServiceProvider = Provider<ApiService>((ref) {
   return ApiService();
 });
 
- final userLlistProvider = FutureProvider<List<User>>((ref) async {
+ final userListProvider = FutureProvider<List<User>>((ref) async {
   return ref.watch(apiServiceProvider).fetchUser() ;
  });
 
